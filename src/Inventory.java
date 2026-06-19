@@ -98,4 +98,15 @@ public class Inventory {
             this.products.put(p.getName(), p);
         }
     }
+
+    public Product findMostExpensive(){
+        if (products.isEmpty())return null;
+        Product mostExpensive = null;
+        for (Product p : products.values()){
+            if (mostExpensive == null || p.getPrice()>mostExpensive.getPrice()){
+                mostExpensive=p;
+            }
+        }
+        return mostExpensive;
+    }
 }

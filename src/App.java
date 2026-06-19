@@ -10,7 +10,8 @@ public class App {
         System.out.println("4 - Show product");
         System.out.println("5 - Show all products");
         System.out.println("6 - Search product");
-        System.out.println("7 - Save & exit");
+        System.out.println("7 - find most expensive product");
+        System.out.println("8 - Save & exit");
         System.out.print("Choose option: ");
     }
 
@@ -81,6 +82,11 @@ public class App {
         }
     }
 
+    public static void showMostExpensive(Inventory inventory){
+        Product p = inventory.findMostExpensive();
+        System.out.println("most expensive: "+p);
+    }
+
     public static void run(Inventory inventory) {
 
         Scanner input = new Scanner(System.in);
@@ -98,7 +104,8 @@ public class App {
                 case 4 -> showProductUI(inventory, input);
                 case 5 -> showAllProducts(inventory);
                 case 6 -> searchProduct(inventory, input);
-                case 7 -> running = false;
+                case 7 -> showMostExpensive(inventory);
+                case 8 -> running = false;
             }
         }
     }
