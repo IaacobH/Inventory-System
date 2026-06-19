@@ -1,0 +1,10 @@
+queso;50.0;44
+cafe;14.0;55
+fafafalopa;45.0;555
+fernet;30.0;66
+azucar;10.0;30
+dulce de leche;40.0;5
+avena;6.0;50
+leche entera;20.0;10
+leche descremada;20.0;10
+agua;3.0;60
