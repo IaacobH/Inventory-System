@@ -13,13 +13,14 @@ public class App {
         System.out.println("6 - Search product");
         System.out.println("7 - find most expensive product");
         System.out.println("8 - show low stock products");
-        System.out.println("9 - Save & exit");
+        System.out.println("9 - Delete product");
+        System.out.println("10 - save and exit");
         System.out.print("Choose option: ");
     }
 
     public static void printResult(Inventory.Result r){
         switch (r) {
-            case OK -> System.out.println("Stock actualizado");
+            case OK -> System.out.println("accion ejecutada con exito");
             case DUPLICATE_PRODUCT -> System.out.println("el producto ya existe");
             case PRODUCT_NOT_FOUND -> System.out.println("Producto no existe");
             case INVALID_AMOUNT -> System.out.println("Cantidad inválida");
@@ -115,6 +116,12 @@ public class App {
         showProducts(inventory.getProductsStockBelowX(maxStock));
     }
 
+    public static void deleteProduct(Inventory inventory, Scanner input){
+        String name = InputUtils.getString(input, "name of the product to delete: ");
+        Inventory.Result r = inventory.deleteProduct(name);
+        printResult(r);
+    }
+
     public static void run(Inventory inventory) {
 
         Scanner input = new Scanner(System.in);
@@ -134,7 +141,8 @@ public class App {
                 case 6 -> searchProduct(inventory, input);
                 case 7 -> showMostExpensive(inventory);
                 case 8 -> showBelowXStock(inventory, input);
-                case 9 -> running = false;
+                case 9 -> deleteProduct(inventory, input);
+                case 10 -> running = false;
             }
         }
     }

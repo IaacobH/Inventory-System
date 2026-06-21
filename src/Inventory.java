@@ -89,6 +89,14 @@ public class Inventory {
         return Result.OK;
     }
 
+    public Result deleteProduct(String name){
+        if(!products.containsKey(name))return Result.PRODUCT_NOT_FOUND;
+
+        products.remove(name);
+        return Result.OK;
+
+    }
+
     public Result addStock(String name, int amount){
         if (isInvalidAmount(amount)) return Result.INVALID_AMOUNT;
 

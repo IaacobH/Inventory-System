@@ -10,4 +10,3 @@ fernet;30.0;66
 dulce de leche;40.0;5
 leche entera;20.0;10
 leche descremada;20.0;10
-agua;3.0;60
