@@ -35,12 +35,32 @@ public class Inventory {
     }
 
     public List<Product> getProductsSortedByName(){
-
         ArrayList<Product> list = new ArrayList<>(products.values());
+        list.sort((p1, p2) -> p1.getName().compareTo(p2.getName()));
+        return list;
+    }
+    public List<Product> getProductsSortedByPriceAscending(){
+        ArrayList<Product> list = new ArrayList<>(products.values());
+        list.sort((p1, p2) -> Double.compare(p1.getPrice(), p2.getPrice()));
+        return list;
+    }
 
-        list.sort(
-                (p1, p2) -> p1.getName().compareTo(p2.getName())
-        );
+    public List<Product> getProductsSortedByPriceDescending(){
+        ArrayList<Product> list = new ArrayList<>(products.values());
+        list.sort((p1, p2) -> Double.compare(p2.getPrice(), p1.getPrice()));
+        return list;
+    }
+
+    public List<Product> getProductsSortedByStockAscending(){
+        ArrayList<Product> list = new ArrayList<>(products.values());
+        list.sort((p1, p2) -> Double.compare(p1.getStock(), p2.getStock()));
+        return list;
+
+    }
+
+    public List<Product> getProductsSortedByStockDescending(){
+        ArrayList<Product> list = new ArrayList<>(products.values());
+        list.sort((p1, p2) -> Double.compare(p2.getStock(), p1.getStock()));
         return list;
     }
 

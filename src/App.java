@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 public class App {
 
@@ -76,8 +77,29 @@ public class App {
         }
     }
 
-    public static void showAllProducts(Inventory inventory){
-        for (Product p : inventory.getProductsSortedByName()) {
+    public static void showAllProducts(Inventory inventory, Scanner input) {
+        int option = InputUtils.getInt(input, """
+                                How would you like to sort the products?
+                
+                1 - Name
+                2 - Price (Low to High)
+                3 - Price (High to Low)
+                4 - Stock (Low to High)
+                5 - Stock (High to Low)
+                
+                Option: """);
+
+        switch (option) {
+            case 1 -> showProducts(inventory.getProductsSortedByName());
+            case 2 -> showProducts(inventory.getProductsSortedByPriceAscending());
+            case 3 -> showProducts(inventory.getProductsSortedByPriceDescending());
+            case 4 -> showProducts(inventory.getProductsSortedByStockAscending());
+            case 5 -> showProducts(inventory.getProductsSortedByStockDescending());
+            default -> System.out.println("Invalid option");
+        }
+    }
+    public static void showProducts(List<Product> list){
+        for (Product p : list){
             System.out.println(p);
         }
     }
@@ -102,7 +124,7 @@ public class App {
                 case 2 -> addStockUI(inventory, input);
                 case 3 -> removeStockUI(inventory, input);
                 case 4 -> showProductUI(inventory, input);
-                case 5 -> showAllProducts(inventory);
+                case 5 -> showAllProducts(inventory, input);
                 case 6 -> searchProduct(inventory, input);
                 case 7 -> showMostExpensive(inventory);
                 case 8 -> running = false;
