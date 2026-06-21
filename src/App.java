@@ -77,7 +77,7 @@ public class App {
     }
 
     public static void showAllProducts(Inventory inventory){
-        for (Product p : inventory.getAllProducts()) {
+        for (Product p : inventory.getProductsSortedByName()) {
             System.out.println(p);
         }
     }

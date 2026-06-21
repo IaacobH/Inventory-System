@@ -34,6 +34,15 @@ public class Inventory {
         return products.get(name);
     }
 
+    public List<Product> getProductsSortedByName(){
+
+        ArrayList<Product> list = new ArrayList<>(products.values());
+
+        list.sort(
+                (p1, p2) -> p1.getName().compareTo(p2.getName())
+        );
+        return list;
+    }
 
 
     private boolean isInvalidAmount(int amount) {
