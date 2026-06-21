@@ -12,7 +12,8 @@ public class App {
         System.out.println("5 - Show all products");
         System.out.println("6 - Search product");
         System.out.println("7 - find most expensive product");
-        System.out.println("8 - Save & exit");
+        System.out.println("8 - show products with stock below X");
+        System.out.println("9 - Save & exit");
         System.out.print("Choose option: ");
     }
 
@@ -109,6 +110,11 @@ public class App {
         System.out.println("most expensive: "+p);
     }
 
+    public static void showBelowXStock(Inventory inventory, Scanner input){
+        int maxStock = InputUtils.getInt(input, "show products with stock below: ");
+        showProducts(inventory.getProductsStockBelowX(maxStock));
+    }
+
     public static void run(Inventory inventory) {
 
         Scanner input = new Scanner(System.in);
@@ -127,7 +133,8 @@ public class App {
                 case 5 -> showAllProducts(inventory, input);
                 case 6 -> searchProduct(inventory, input);
                 case 7 -> showMostExpensive(inventory);
-                case 8 -> running = false;
+                case 8 -> showBelowXStock(inventory, input);
+                case 9 -> running = false;
             }
         }
     }

@@ -64,6 +64,17 @@ public class Inventory {
         return list;
     }
 
+    public List<Product> getProductsStockBelowX (int maxStock){
+        ArrayList<Product> list = new ArrayList<>();
+        for (Product p : products.values()){
+            if (p.getStock() < maxStock){
+                list.add(p);
+            }
+        }
+        list.sort((p1, p2) -> Double.compare(p1.getStock(), p2.getStock()));
+        return list;
+    }
+
 
     private boolean isInvalidAmount(int amount) {
         return amount <= 0;
