@@ -12,7 +12,7 @@ public class App {
         System.out.println("5 - Show all products");
         System.out.println("6 - Search product");
         System.out.println("7 - find most expensive product");
-        System.out.println("8 - show products with stock below X");
+        System.out.println("8 - show low stock products");
         System.out.println("9 - Save & exit");
         System.out.print("Choose option: ");
     }
