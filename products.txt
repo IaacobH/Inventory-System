@@ -1,12 +1,12 @@
 atun;12.0;70
-harina;5.0;50
-sardinas;15.0;60
-azucar;10.0;30
-avena;6.0;50
 queso;50.0;44
 cafe;14.0;55
+harina;5.0;50
 fafafalopa;45.0;555
+sardinas;15.0;60
 fernet;30.0;66
+azucar;10.0;30
+avena;7.0;50
 dulce de leche;40.0;5
 leche entera;20.0;10
 leche descremada;20.0;10

@@ -12,6 +12,7 @@ public class Inventory {
         OK,
         PRODUCT_NOT_FOUND,
         INVALID_AMOUNT,
+        INVALID_PRICE,
         INSUFFICIENT_STOCK,
         DUPLICATE_PRODUCT
     }
@@ -105,6 +106,16 @@ public class Inventory {
 
         p.addStock(amount);
         return Result.OK;
+    }
+
+    public Result updatePrice(String name, double newPrice){
+
+        if(!products.containsKey(name))return Result.PRODUCT_NOT_FOUND;
+        if(newPrice <= 0 )return Result.INVALID_PRICE;
+
+        products.get(name).setPrice(newPrice);
+        return Result.OK;
+
     }
 
 

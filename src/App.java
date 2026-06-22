@@ -14,7 +14,8 @@ public class App {
         System.out.println("7 - find most expensive product");
         System.out.println("8 - show low stock products");
         System.out.println("9 - Delete product");
-        System.out.println("10 - save and exit");
+        System.out.println("10 - update product price");
+        System.out.println("11 - save and exit");
         System.out.print("Choose option: ");
     }
 
@@ -122,6 +123,15 @@ public class App {
         printResult(r);
     }
 
+    public static void updateProductPrice(Inventory inventory, Scanner input){
+        String productName = InputUtils.getString(input, "product name: ");
+        System.out.println(inventory.getProduct(productName));
+        double newPrice = InputUtils.getDouble(input, "new price: ");
+        Inventory.Result r = inventory.updatePrice(productName, newPrice);
+        printResult(r);
+        System.out.println(inventory.getProduct(productName));
+    }
+
     public static void run(Inventory inventory) {
 
         Scanner input = new Scanner(System.in);
@@ -142,7 +152,8 @@ public class App {
                 case 7 -> showMostExpensive(inventory);
                 case 8 -> showBelowXStock(inventory, input);
                 case 9 -> deleteProduct(inventory, input);
-                case 10 -> running = false;
+                case 10 -> updateProductPrice(inventory, input);
+                case 11 -> running = false;
             }
         }
     }
