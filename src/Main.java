@@ -4,13 +4,13 @@ public class Main {
 
     public static void main(String[] args) {
         Inventory inventory = new Inventory();
-        InventoryRepository repository = new InventoryRepository();
+        InventoryRepository repository = new FileInventoryRepository();
 
-        List<Product> products = repository.loadFromFile();
+        List<Product> products = repository.read();
         inventory.addProducts(products);
 
         App.run(inventory);
 
-        repository.saveToFile(inventory.getAllProducts());
+        repository.save(inventory.getAllProducts());
     }
 }
