@@ -1,3 +1,7 @@
+package Repository;
+
+import Model.Product;
+
 import java.util.Collection;
 import java.util.List;
 

@@ -1,3 +1,7 @@
+package Repository;
+
+import Model.Product;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -6,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class FileInventoryRepository implements InventoryRepository{
+public class FileInventoryRepository implements InventoryRepository {
     @Override
     public void save(Collection<Product> products) {
 

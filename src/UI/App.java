@@ -1,3 +1,8 @@
+package UI;
+
+import Model.Product;
+import Service.Inventory;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -30,7 +35,7 @@ public class App {
     }
 
     public static void addProductUI(Inventory inventory, Scanner input) {
-        String name = InputUtils.getString(input, "Product name: ");
+        String name = InputUtils.getString(input, "Model.Product name: ");
         double price = InputUtils.getDouble(input, "Price: ");
         int stock = InputUtils.getInt(input, "Stock: ");
 
@@ -40,7 +45,7 @@ public class App {
     }
 
     public static void addStockUI(Inventory inventory, Scanner input) {
-        String name = InputUtils.getString(input, "Product name: ");
+        String name = InputUtils.getString(input, "Model.Product name: ");
         int amount = InputUtils.getInt(input, "Amount: ");
 
         Inventory.Result r = inventory.addStock(name, amount);
@@ -50,14 +55,14 @@ public class App {
     }
 
     public static void removeStockUI(Inventory inventory, Scanner input) {
-        String name = InputUtils.getString(input, "Product name: ");
+        String name = InputUtils.getString(input, "Model.Product name: ");
         int amount = InputUtils.getInt(input, "Amount: ");
         Inventory.Result r = inventory.removeStock(name, amount);
         printResult(r);
     }
 
     public static void showProductUI(Inventory inventory, Scanner input) {
-        String name = InputUtils.getString(input, "Product name: ");
+        String name = InputUtils.getString(input, "Model.Product name: ");
         Product p = inventory.getProduct(name);
 
         if (p == null) {

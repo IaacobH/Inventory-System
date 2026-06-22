@@ -1,7 +1,11 @@
+package Repository;
+
+import Model.Product;
+
 import java.util.Collection;
 import java.util.List;
 
-public class JsonRepository implements InventoryRepository{
+public class JsonRepository implements InventoryRepository {
     @Override
     public void save(Collection<Product> products) {
 
