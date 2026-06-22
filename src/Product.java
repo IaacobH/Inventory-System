@@ -47,18 +47,6 @@ public class Product {
         this.price = price;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setStock(int stock) {
-        if (stock < 0) {
-            throw new IllegalArgumentException(
-                    "Stock cannot be negative"
-            );
-        }
-        this.stock = stock;
-    }
 
     public void addStock(int amount) {
         if (amount < 0) {
