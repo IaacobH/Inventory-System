@@ -6,11 +6,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        Service.Inventory inventory = new Service.Inventory();
-        Repository.InventoryRepository repository = null;
-
+    private static Repository.InventoryRepository chooseRepository(Scanner input, Repository.InventoryRepository repository){
         boolean validOption = false;
         while(!validOption) {
             System.out.println("\n===== STORAGE TYPE =====");
@@ -30,10 +26,19 @@ public class Main {
                 default -> System.out.println("Invalid option. Please choose 1 or 2.");
             }
         }
+        return repository;
+    }
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        Service.Inventory inventory = new Service.Inventory();
+
+        Repository.InventoryRepository repository = null;
+        repository = chooseRepository(input, repository);
 
         List<Product> products = repository.read();
         inventory.addProducts(products);
-
         UI.App.run(inventory);
 
         repository.save(inventory.getAllProducts());
