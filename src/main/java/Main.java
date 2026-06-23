@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
 
         Service.Inventory inventory = new Service.Inventory();
-        Repository.InventoryRepository repository = new Repository.FileInventoryRepository();
+        Repository.InventoryRepository repository = new Repository.JsonRepository();
 
         List<Product> products = repository.read();
         inventory.addProducts(products);

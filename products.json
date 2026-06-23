@@ -1,12 +1,13 @@
-[
-  {
-    "name": "arroz",
-    "price": 50.0,
-    "stock": 10
-  },
-  {
-    "name": "atun",
-    "price": 12.0,
-    "stock": 70
-  }
-]
+[ {
+  "name" : "arroz",
+  "price" : 50.0,
+  "stock" : 10
+}, {
+  "name" : "atun",
+  "price" : 12.0,
+  "stock" : 70
+}, {
+  "name" : "raidcuca",
+  "price" : 4.0,
+  "stock" : 50
+} ]
