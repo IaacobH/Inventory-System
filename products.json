@@ -1,0 +1,12 @@
+[
+  {
+    "name": "arroz",
+    "price": 50.0,
+    "stock": 10
+  },
+  {
+    "name": "atun",
+    "price": 12.0,
+    "stock": 70
+  }
+]

@@ -49,6 +49,19 @@ public class Product {
         this.price = price;
     }
 
+    public void setName(String name) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Name cannot be empty");
+        }
+        this.name = name;
+    }
+
+    public void setStock(int stock) {
+        if (stock < 0) {
+            throw new IllegalArgumentException("Stock cannot be negative");
+        }
+        this.stock = stock;
+    }
 
     public void addStock(int amount) {
         if (amount < 0) {
