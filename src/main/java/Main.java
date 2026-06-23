@@ -5,10 +5,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Product arroz = new Product("arroz",50,10);
-
-
-
         Service.Inventory inventory = new Service.Inventory();
         Repository.InventoryRepository repository = new Repository.FileInventoryRepository();
 
