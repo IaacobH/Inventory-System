@@ -10,14 +10,14 @@ import java.util.List;
 public class JsonRepository implements InventoryRepository {
 
     private static final String FILE_PATH = "products.json";
-    private ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper = new ObjectMapper();
 
 
     @Override
     public void save(Collection<Product> products) {
         try {
             mapper.writerWithDefaultPrettyPrinter()
-                    .writeValue(new File("products.json"), products);
+                    .writeValue(new File(FILE_PATH), products);
         } catch (Exception e) {
             System.out.println("Error saving JSON file");
         }
@@ -30,6 +30,7 @@ public class JsonRepository implements InventoryRepository {
             System.out.println("No JSON file found. Starting with empty inventory.");
             return List.of();
         }
+
         try {
             return mapper.readValue(
                     file,

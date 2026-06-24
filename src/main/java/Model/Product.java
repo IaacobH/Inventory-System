@@ -89,8 +89,14 @@ public class Product {
     public String toFileString(){
         return name+";"+price+";"+stock;
     }
+
     public static Product fromFileString(String file){
         String[] parts = file.split(";");
+
+        if (parts.length != 3) {
+            throw new IllegalArgumentException("Invalid product line");
+        }
+
         return new Product(parts[0], Double.parseDouble(parts[1]), Integer.parseInt(parts[2])
         );
     }

@@ -12,16 +12,11 @@ public class FileInventoryRepository implements InventoryRepository {
     @Override
     public void save(Collection<Product> products) {
 
-        try {
-            FileWriter fw = new FileWriter("products.txt");
-
+        try (FileWriter fw = new FileWriter(FILE_PATH)){
             for (Product p : products) {
                 fw.write(p.toFileString());
                 fw.write("\n");
             }
-
-            fw.close();
-
         } catch (IOException e) {
             System.out.println("Error al guardar");
         }
@@ -42,8 +37,12 @@ public class FileInventoryRepository implements InventoryRepository {
             String line;
 
             while ((line = br.readLine()) != null) {
-                Product p = Product.fromFileString(line);
-                products.add(p);
+                try {
+                    Product p = Product.fromFileString(line);
+                    products.add(p);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Skipping invalid line: " + line);
+                }
             }
 
         } catch (IOException e) {
