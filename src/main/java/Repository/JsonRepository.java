@@ -23,9 +23,14 @@ public class JsonRepository implements InventoryRepository {
 
     @Override
     public List<Product> read() {
+        File file = new File("products.json");
+        if(!file.exists()){
+            System.out.println("No JSON file found. Starting with empty inventory.");
+            return List.of();
+        }
         try {
             return mapper.readValue(
-                    new File("products.json"),
+                    file,
                     new TypeReference<List<Product>>() {}
             );
         } catch (Exception e) {

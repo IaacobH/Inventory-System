@@ -34,6 +34,7 @@ public class Main {
 
         List<Product> products = repository.read();
         inventory.addProducts(products);
+        System.out.println(products.size() + " products loaded.");
 
         UI.App.run(inventory);
 

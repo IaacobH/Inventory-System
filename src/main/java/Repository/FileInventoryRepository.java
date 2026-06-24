@@ -2,10 +2,7 @@ package Repository;
 
 import Model.Product;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -33,7 +30,13 @@ public class FileInventoryRepository implements InventoryRepository {
     public List<Product> read() {
         List<Product> products = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader("products.txt"))) {
+        File file = new File("products.txt");
+        if (!file.exists()) {
+            System.out.println("No TXT file found. Starting with empty inventory.");
+            return List.of();
+        }
+
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 
             String line;
 
