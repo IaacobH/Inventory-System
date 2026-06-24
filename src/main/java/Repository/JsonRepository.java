@@ -9,7 +9,9 @@ import java.util.List;
 
 public class JsonRepository implements InventoryRepository {
 
+    private static final String FILE_PATH = "products.json";
     private ObjectMapper mapper = new ObjectMapper();
+
 
     @Override
     public void save(Collection<Product> products) {
@@ -23,7 +25,7 @@ public class JsonRepository implements InventoryRepository {
 
     @Override
     public List<Product> read() {
-        File file = new File("products.json");
+        File file = new File(FILE_PATH);
         if(!file.exists()){
             System.out.println("No JSON file found. Starting with empty inventory.");
             return List.of();
