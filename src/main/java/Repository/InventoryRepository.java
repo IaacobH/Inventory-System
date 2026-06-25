@@ -1,6 +1,6 @@
-package Repository;
+package repository;
 
-import Model.Product;
+import model.Product;
 
 import java.util.Collection;
 import java.util.List;

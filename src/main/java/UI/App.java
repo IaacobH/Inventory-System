@@ -1,7 +1,7 @@
-package UI;
+package ui;
 
-import Model.Product;
-import Service.Inventory;
+import model.Product;
+import service.Inventory;
 
 import java.util.ArrayList;
 import java.util.List;
