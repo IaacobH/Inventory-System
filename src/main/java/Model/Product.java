@@ -1,11 +1,13 @@
 package model;
 
 public class Product {
+    private int id;
     private String name;
     private double price;
     private int stock;
+    private Category category;
 
-    public Product(String name, double price, int stock) {
+    public Product(String name, double price, int stock, Category category) {
 
         if (name.isBlank()) {
             throw new IllegalArgumentException("Name cannot be empty");
@@ -22,6 +24,7 @@ public class Product {
         this.name = name;
         this.price = price;
         this.stock = stock;
+        this.category = category;
     }
 
     public Product (){}
@@ -83,21 +86,12 @@ public class Product {
                 "name='" + name + '\'' +
                 ", price=" + price +
                 ", stock=" + stock +
+                ", category="+ category+
                 '}';
     }
 
     public String toFileString(){
-        return name+";"+price+";"+stock;
+        return name+";"+price+";"+stock+";"+category;
     }
 
-    public static Product fromFileString(String file){
-        String[] parts = file.split(";");
-
-        if (parts.length != 3) {
-            throw new IllegalArgumentException("Invalid product line");
-        }
-
-        return new Product(parts[0], Double.parseDouble(parts[1]), Integer.parseInt(parts[2])
-        );
-    }
 }

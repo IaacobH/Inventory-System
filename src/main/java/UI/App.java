@@ -1,9 +1,11 @@
 package ui;
 
+import model.Category;
 import model.Product;
 import service.Inventory;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 public class App {
@@ -34,12 +36,22 @@ public class App {
         }
     }
 
+
+    public static void showCategories(List<Category> categories){
+        for(Category c : categories){
+            System.out.println(c);
+        }
+    }
+
     public static void addProductUI(Inventory inventory, Scanner input) {
         String name = InputUtils.getString(input, "Product name: ");
         double price = InputUtils.getDouble(input, "Price: ");
         int stock = InputUtils.getInt(input, "Stock: ");
+        showCategories(inventory.getAllCategories());
+        int categoryId = InputUtils.getInt(input, "select category id: ");
+        Category category = inventory.getCategoryById(categoryId);
 
-        Inventory.Result r =inventory.addProduct(name, price, stock);
+        Inventory.Result r =inventory.addProduct(name, price, stock, category);
 
         printResult(r);
     }
@@ -111,6 +123,7 @@ public class App {
             System.out.println(p);
         }
     }
+
 
     public static void showMostExpensive(Inventory inventory){
         Product p = inventory.findMostExpensive();

@@ -1,5 +1,6 @@
 package service;
 
+import model.Category;
 import model.Product;
 
 import java.util.ArrayList;
@@ -18,9 +19,44 @@ public class Inventory {
     }
 
     private HashMap<String, Product> products;
+    private HashMap<Integer, Category> categories;
+
+
+    public void addProducts(List<Product> products) {
+        for (Product p : products) {
+            this.products.put(p.getName(), p);
+        }
+    }
+
+    public void addCategories(List<Category> categories){
+        for(Category c : categories){
+            this.categories.put(c.getId(), c);
+        }
+    }
+
+
 
     public Collection<Product> getAllProducts() {
         return products.values();
+    }
+
+    public List<Category> getAllCategories(){
+        ArrayList<Category> list = new ArrayList<>(categories.values());
+        return list;
+    }
+
+    public Category getCategoryById(int id) {
+        return categories.get(id);
+    }
+
+    public String getCategoryNameById(int id) {
+        Category category = getCategoryById(id);
+
+        if (category == null) {
+            return null;
+        }
+
+        return category.getName();
     }
 
     public Inventory() {
@@ -81,11 +117,11 @@ public class Inventory {
         return amount <= 0;
     }
 
-    public Result addProduct(String name, double price, int stock) {
+    public Result addProduct(String name, double price, int stock, Category category) {
 
         if(products.containsKey(name))return Result.DUPLICATE_PRODUCT;
 
-        Product p = new Product(name,price,stock);
+        Product p = new Product(name,price,stock,category);
         products.put(p.getName(), p);
         return Result.OK;
     }
@@ -152,11 +188,6 @@ public class Inventory {
         return results;
     }
 
-    public void addProducts(List<Product> products) {
-        for (Product p : products) {
-            this.products.put(p.getName(), p);
-        }
-    }
 
     public Product findMostExpensive(){
         if (products.isEmpty())return null;
