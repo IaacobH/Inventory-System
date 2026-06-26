@@ -41,6 +41,14 @@ public class Product {
         return stock;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public void setPrice(double price) {
 
         if (price < 0) {
@@ -86,7 +94,7 @@ public class Product {
                 "name='" + name + '\'' +
                 ", price=" + price +
                 ", stock=" + stock +
-                ", category="+ category+
+                ", category="+ category.getName()+
                 '}';
     }
 

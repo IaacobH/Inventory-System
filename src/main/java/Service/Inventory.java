@@ -18,9 +18,14 @@ public class Inventory {
         DUPLICATE_PRODUCT
     }
 
-    private HashMap<String, Product> products;
-    private HashMap<Integer, Category> categories;
+    private HashMap<String, Product> products = new HashMap<>();
+    private HashMap<Integer, Category> categories = new HashMap<>();
 
+//    public Inventory() {
+//
+//        this.products = new HashMap<>();
+//        this.categories = new HashMap<>();
+//    }
 
     public void addProducts(List<Product> products) {
         for (Product p : products) {
@@ -59,9 +64,6 @@ public class Inventory {
         return category.getName();
     }
 
-    public Inventory() {
-        this.products = new HashMap<>();
-    }
 
     private Product getProductOrNull(String name) {
         return products.get(name);

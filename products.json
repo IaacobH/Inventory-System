@@ -2,20 +2,32 @@
   "name" : "arroz",
   "price" : 2.0,
   "stock" : 10,
-  "categoryId": 1
+  "category": {
+    "id": 1,
+    "name": "Food"
+  }
 }, {
   "name" : "atun",
   "price" : 3.0,
   "stock" : 70,
-  "categoryId": 1
+  "category": {
+    "id": 1,
+    "name": "Food"
+  }
 }, {
   "name" : "raidcuca",
   "price" : 10.0,
   "stock" : 50,
-  "categoryId": 2
+  "category": {
+    "id": 2,
+    "name": "Cleaning"
+  }
 },{
   "name" : "mouse",
   "price" : 22.0,
   "stock" : 40,
-  "categoryId": 3
+  "category":{
+    "id": 4,
+    "name": "technology"
+  }
 }]
