@@ -7,8 +7,10 @@ public class Product {
     private int stock;
     private Category category;
 
-    public Product(String name, double price, int stock, Category category) {
+    public Product() {
+    }
 
+    public Product(String name, double price, int stock, Category category) {
         if (name.isBlank()) {
             throw new IllegalArgumentException("Name cannot be empty");
         }
@@ -27,14 +29,12 @@ public class Product {
         this.category = category;
     }
 
-    public Product (){}
+    public String getName() {
+        return name;
+    }
 
     public double getPrice() {
         return price;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public int getStock() {
@@ -45,39 +45,39 @@ public class Product {
         return category;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public void setPrice(double price) {
-
-        if (price < 0) {
-            throw new IllegalArgumentException(
-                    "Price cannot be negative"
-            );
-        }
-
-        this.price = price;
-    }
-
     public void setName(String name) {
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Name cannot be empty");
         }
+
         this.name = name;
+    }
+
+    public void setPrice(double price) {
+        if (price < 0) {
+            throw new IllegalArgumentException("Price cannot be negative");
+        }
+
+        this.price = price;
     }
 
     public void setStock(int stock) {
         if (stock < 0) {
             throw new IllegalArgumentException("Stock cannot be negative");
         }
+
         this.stock = stock;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public void addStock(int amount) {
         if (amount < 0) {
             return;
         }
+
         this.stock += amount;
     }
 
@@ -85,7 +85,12 @@ public class Product {
         if (amount < 0 || amount > stock) {
             return;
         }
+
         stock -= amount;
+    }
+
+    public String toFileString() {
+        return name + ";" + price + ";" + stock + ";" + category;
     }
 
     @Override
@@ -94,12 +99,7 @@ public class Product {
                 "name='" + name + '\'' +
                 ", price=" + price +
                 ", stock=" + stock +
-                ", category="+ category.getName()+
+                ", category=" + (category == null ? "No category" : category.getName()) +
                 '}';
     }
-
-    public String toFileString(){
-        return name+";"+price+";"+stock+";"+category;
-    }
-
 }
