@@ -1,0 +1,71 @@
+INSERT INTO products (name, price, stock, category_id)
+VALUES ('apple',80,12,2);
+
+SELECT * FROM products;
+
+SELECT * FROM products ORDER BY price DESC;
+
+
+SELECT name, price FROM products;
+
+SELECT * FROM products WHERE stock < 10;
+
+UPDATE products
+set stock = stock -1
+where name = 'mouse';
+
+DELETE FROM products where id =12;
+
+SELECT count (*)
+FROM products;
+
+select avg(price)
+FROM products;
+
+SELECT products.name,
+products.price,
+categories.name
+from products
+JOIN categories
+on products.category_id = categories.id;
+
+SELECT * from products
+where category_id =2
+and stock > 10
+
+SELECT * FROM products
+where category_id =1
+or category_id =3
+
+SELECT * FROM products
+where name like 'm%'
+
+SELECT * FROM products
+where name like '%e'
+
+SELECT * FROM products
+where name like '%us%'
+
+select * from products
+order by price DESC
+limit 3;
+
+SELECT *
+FROM products
+WHERE NOT category_id = 1;
+
+SELECT
+    categories.name,
+	avg(price)
+FROM products
+join categories
+on products.category_id = categories.id
+GROUP BY category_id;
+
+SELECT
+    categories.name,
+	count(*) as total_products
+FROM products
+join categories
+on products.category_id = categories.id
+GROUP BY category_id;
