@@ -69,3 +69,38 @@ FROM products
 join categories
 on products.category_id = categories.id
 GROUP BY category_id;
+
+SELECT categories.name,
+ count(*) AS total
+FROM products
+JOIN categories
+ON products.category_id = categories.id
+GROUP BY categories.name
+HAVING count(*)>=3;
+
+
+SUBCONSULTAS
+primero se ejecuta el parentesis, trae el porcentaje de precio
+SELECT *
+FROM products
+WHERE price > (
+    SELECT AVG(price)
+    FROM products
+);
+ejemplo 2:
+todos los productos de la categoria tech
+SELECT *
+FROM products
+WHERE category_id = (
+    SELECT id
+    FROM categories
+    WHERE name = 'Technology'
+);
+
+SELECT *
+FROM products
+WHERE category_id IN (
+    SELECT id
+    FROM categories
+    WHERE name IN ('Food', 'Home')
+);
