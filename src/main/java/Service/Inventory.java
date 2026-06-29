@@ -14,8 +14,10 @@ public class Inventory {
         PRODUCT_NOT_FOUND,
         INVALID_AMOUNT,
         INVALID_PRICE,
+        INVALID_STOCK,
         INSUFFICIENT_STOCK,
-        DUPLICATE_PRODUCT
+        DUPLICATE_PRODUCT,
+        CATEGORY_NOT_FOUND
     }
 
     private HashMap<String, Product> products = new HashMap<>();
@@ -122,6 +124,9 @@ public class Inventory {
     public Result addProduct(String name, double price, int stock, Category category) {
 
         if(products.containsKey(name))return Result.DUPLICATE_PRODUCT;
+        if(price<=0)return Result.INVALID_PRICE;
+        if(stock<0)return Result.INVALID_STOCK;
+        if(category==null)return Result.CATEGORY_NOT_FOUND;
 
         Product p = new Product(name,price,stock,category);
         products.put(p.getName(), p);

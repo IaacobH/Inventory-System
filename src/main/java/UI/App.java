@@ -4,6 +4,7 @@ import model.Category;
 import model.Product;
 import service.Inventory;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -166,10 +167,13 @@ public class App {
     public static void printResult(Inventory.Result r) {
         switch (r) {
             case OK -> System.out.println("accion ejecutada con exito");
-            case DUPLICATE_PRODUCT -> System.out.println("el producto ya existe");
             case PRODUCT_NOT_FOUND -> System.out.println("Producto no existe");
             case INVALID_AMOUNT -> System.out.println("Cantidad inválida");
+            case INVALID_PRICE -> System.out.println("invalid price");
+            case INVALID_STOCK -> System.out.println("invalid stock");
             case INSUFFICIENT_STOCK -> System.out.println("stock insuficiente");
+            case DUPLICATE_PRODUCT -> System.out.println("el producto ya existe");
+            case CATEGORY_NOT_FOUND -> System.out.println("categoria invalida");
         }
     }
 }
