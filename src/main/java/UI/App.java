@@ -78,6 +78,7 @@ public class App {
         String name = InputUtils.getString(input, "Product name: ");
         int amount = InputUtils.getInt(input, "Amount: ");
 
+
         Inventory.Result r = inventory.removeStock(name, amount);
         printResult(r);
     }

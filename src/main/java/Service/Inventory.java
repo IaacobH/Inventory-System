@@ -24,11 +24,6 @@ public class Inventory {
     private HashMap<String, Product> products = new HashMap<>();
     private HashMap<Integer, Category> categories = new HashMap<>();
 
-//    public Inventory() {
-//
-//        this.products = new HashMap<>();
-//        this.categories = new HashMap<>();
-//    }
 
     public void addProducts(List<Product> products) {
         for (Product p : products) {
@@ -134,15 +129,19 @@ public class Inventory {
         Product p = new Product(name,price,stock,category);
         products.put(p.getName(), p);
         SQLiteProductRepository.save(p);
+
+        int id = SQLiteProductRepository.getProductId(p.getName());
+        p.setId(id);
         return Result.OK;
     }
+
 
     public Result deleteProduct(String name){
         if(!products.containsKey(name))return Result.PRODUCT_NOT_FOUND;
 
         products.remove(name);
-//        int id = products.get(name).getId();
-//        SQLiteProductRepository.deleteById(id);
+        int id = products.get(name).getId();
+        SQLiteProductRepository.deleteById(id);
         return Result.OK;
 
     }
@@ -154,6 +153,7 @@ public class Inventory {
         if (p==null) return Result.PRODUCT_NOT_FOUND;
 
         p.addStock(amount);
+        SQLiteProductRepository.updateStockById(p.getId(),amount);
         return Result.OK;
     }
 
@@ -163,6 +163,8 @@ public class Inventory {
         if(newPrice <= 0 )return Result.INVALID_PRICE;
 
         products.get(name).setPrice(newPrice);
+        int id = products.get(name).getId();
+        SQLiteProductRepository.updatePriceById(id,newPrice);
         return Result.OK;
 
     }
@@ -184,6 +186,7 @@ public class Inventory {
         }
 
         p.removeStock(amount);
+        SQLiteProductRepository.updateStockById(p.getId(),amount);
         return Result.OK;
     }
 

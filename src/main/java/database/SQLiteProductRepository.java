@@ -65,7 +65,7 @@ public class SQLiteProductRepository {
 
                     Category category = new Category(categoryId, categoryName);
 
-                    Product product = new Product(name, price, stock, category);
+                    Product product = new Product(productId, name, price, stock, category);
 
                     products.add(product);
                 }
@@ -76,6 +76,32 @@ public class SQLiteProductRepository {
             throw new RuntimeException(e);
         }
         return products;
+    }
+
+    public static int getProductId (String name){
+        try(Connection connection = DatabaseConnection.getConnection()){
+
+            String sql = """
+                SELECT id
+                FROM products 
+                    WHERE name = ?
+                """;
+
+            try (PreparedStatement statement = connection.prepareStatement(sql)){
+
+                statement.setString(1, name);
+
+                ResultSet resultSet = statement.executeQuery();
+                if (resultSet.next()){
+                    int id = resultSet.getInt("id");
+                    return id;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 
 
@@ -112,7 +138,7 @@ public class SQLiteProductRepository {
 
                     Category category = new Category(categoryId, categoryName);
 
-                    return new Product(name, price, stock, category);
+                    return new Product(productId, name, price, stock, category);
                 }
                 return null;
             }
@@ -124,18 +150,41 @@ public class SQLiteProductRepository {
     }
 
 
-    public static void updateStockById(int id, int newStock){
+    public static void updateStockById(int id, int amount){
         try(Connection connection = DatabaseConnection.getConnection()){
 
             String sql = """
                 UPDATE products 
-                    SET stock = ?
+                    SET stock = (stock - ?)
                     WHERE id = ?
                 """;
 
             try (PreparedStatement statement = connection.prepareStatement(sql)){
 
-                statement.setInt(1, newStock);
+                statement.setInt(1, amount);
+                statement.setInt(2, id);
+
+                statement.executeUpdate();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void updatePriceById(int id, double newPrice){
+        try(Connection connection = DatabaseConnection.getConnection()){
+
+            String sql = """
+                UPDATE products 
+                    SET price = ?
+                    WHERE id = ?
+                """;
+
+            try (PreparedStatement statement = connection.prepareStatement(sql)){
+
+                statement.setDouble(1, newPrice);
                 statement.setInt(2, id);
 
                 statement.executeUpdate();
