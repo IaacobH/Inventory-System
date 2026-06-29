@@ -127,11 +127,14 @@ public class Inventory {
         if(category==null)return Result.CATEGORY_NOT_FOUND;
 
         Product p = new Product(name,price,stock,category);
-        products.put(p.getName(), p);
-        SQLiteProductRepository.save(p);
+        int id = SQLiteProductRepository.save(p);
 
-        int id = SQLiteProductRepository.getProductId(p.getName());
+        if (id == -1) {
+            return Result.PRODUCT_NOT_FOUND;
+        }
+
         p.setId(id);
+        products.put(p.getName(), p);
         return Result.OK;
     }
 

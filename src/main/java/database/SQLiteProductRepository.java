@@ -11,7 +11,7 @@ import java.util.List;
 
 public class SQLiteProductRepository {
 
-    public static void save(Product product){
+    public static int save(Product product){
         try(Connection connection = DatabaseConnection.getConnection()){
 
             String sql = """
@@ -27,12 +27,17 @@ public class SQLiteProductRepository {
                 statement.setInt(4, product.getCategory().getId());
 
                 statement.executeUpdate();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
 
+                ResultSet generatedKeys = statement.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                }
+
+                return -1;
+            }
         } catch (Exception e) {
             e.printStackTrace();
+            return -1;
         }
     }
 
