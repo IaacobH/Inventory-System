@@ -1,5 +1,6 @@
 package service;
 
+import database.SQLiteProductRepository;
 import model.Category;
 import model.Product;
 
@@ -34,6 +35,8 @@ public class Inventory {
             this.products.put(p.getName(), p);
         }
     }
+
+
 
     public void addCategories(List<Category> categories){
         for(Category c : categories){
@@ -130,6 +133,7 @@ public class Inventory {
 
         Product p = new Product(name,price,stock,category);
         products.put(p.getName(), p);
+        SQLiteProductRepository.save(p);
         return Result.OK;
     }
 
@@ -137,6 +141,8 @@ public class Inventory {
         if(!products.containsKey(name))return Result.PRODUCT_NOT_FOUND;
 
         products.remove(name);
+//        int id = products.get(name).getId();
+//        SQLiteProductRepository.deleteById(id);
         return Result.OK;
 
     }

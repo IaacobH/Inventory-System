@@ -1,3 +1,5 @@
+import database.SQLiteCategoryRepository;
+import database.SQLiteProductRepository;
 import model.Category;
 import model.Product;
 import repository.CategoryRepository;
@@ -13,11 +15,14 @@ public class Main {
 
         service.Inventory inventory = new service.Inventory();
 
-        ProductRepository productRepository = new JsonProductRepository();
-        CategoryRepository categoryRepository = new JsonCategoryRepository();
-
-        List<Product> products = productRepository.read();
-        List<Category> categories = categoryRepository.read();
+        //json:
+//        ProductRepository productRepository = new JsonProductRepository();
+//        CategoryRepository categoryRepository = new JsonCategoryRepository();
+//        List<Product> products = productRepository.read();
+//        List<Category> categories = categoryRepository.read();
+        //sql:
+        List<Product> products = SQLiteProductRepository.findAll();
+        List<Category> categories = SQLiteCategoryRepository.findAll();
 
         inventory.addProducts(products);
         inventory.addCategories(categories);
@@ -25,7 +30,7 @@ public class Main {
 
         ui.App.run(inventory);
 
-        productRepository.save(inventory.getAllProducts());
-        categoryRepository.save(inventory.getAllCategories());
+//        productRepository.save(inventory.getAllProducts());
+//        categoryRepository.save(inventory.getAllCategories());
     }
 }

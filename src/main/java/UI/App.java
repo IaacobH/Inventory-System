@@ -64,6 +64,8 @@ public class App {
         printResult(r);
     }
 
+
+
     public static void addStockUI(Inventory inventory, Scanner input) {
         String name = InputUtils.getString(input, "Product name: ");
         int amount = InputUtils.getInt(input, "Amount: ");

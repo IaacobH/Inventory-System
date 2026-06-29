@@ -53,6 +53,10 @@ public class Product {
         this.name = name;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public void setPrice(double price) {
         if (price < 0) {
             throw new IllegalArgumentException("Price cannot be negative");
