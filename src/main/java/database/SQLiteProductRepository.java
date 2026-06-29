@@ -6,6 +6,7 @@ import model.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,8 @@ public class SQLiteProductRepository {
                 VALUES (?, ?, ?, ?)
                 """;
 
-            try (PreparedStatement statement = connection.prepareStatement(sql)){
+            try (PreparedStatement statement =
+                         connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
                 statement.setString(1, product.getName());
                 statement.setDouble(2, product.getPrice());
@@ -83,33 +85,6 @@ public class SQLiteProductRepository {
         return products;
     }
 
-    public static int getProductId (String name){
-        try(Connection connection = DatabaseConnection.getConnection()){
-
-            String sql = """
-                SELECT id
-                FROM products 
-                    WHERE name = ?
-                """;
-
-            try (PreparedStatement statement = connection.prepareStatement(sql)){
-
-                statement.setString(1, name);
-
-                ResultSet resultSet = statement.executeQuery();
-                if (resultSet.next()){
-                    int id = resultSet.getInt("id");
-                    return id;
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return -1;
-    }
-
-
     public static Product findById(int id) {
 
         try (Connection connection = DatabaseConnection.getConnection()) {
@@ -155,7 +130,29 @@ public class SQLiteProductRepository {
     }
 
 
-    public static void updateStockById(int id, int amount){
+    public static void addStockById(int id, int amount){
+        try(Connection connection = DatabaseConnection.getConnection()){
+
+            String sql = """
+                UPDATE products 
+                    SET stock = (stock + ?)
+                    WHERE id = ?
+                """;
+
+            try (PreparedStatement statement = connection.prepareStatement(sql)){
+
+                statement.setInt(1, amount);
+                statement.setInt(2, id);
+
+                statement.executeUpdate();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void removeStockById(int id, int amount){
         try(Connection connection = DatabaseConnection.getConnection()){
 
             String sql = """

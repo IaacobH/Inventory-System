@@ -142,8 +142,8 @@ public class Inventory {
     public Result deleteProduct(String name){
         if(!products.containsKey(name))return Result.PRODUCT_NOT_FOUND;
 
-        products.remove(name);
         int id = products.get(name).getId();
+        products.remove(name);
         SQLiteProductRepository.deleteById(id);
         return Result.OK;
 
@@ -156,7 +156,7 @@ public class Inventory {
         if (p==null) return Result.PRODUCT_NOT_FOUND;
 
         p.addStock(amount);
-        SQLiteProductRepository.updateStockById(p.getId(),amount);
+        SQLiteProductRepository.addStockById(p.getId(),amount);
         return Result.OK;
     }
 
@@ -189,7 +189,7 @@ public class Inventory {
         }
 
         p.removeStock(amount);
-        SQLiteProductRepository.updateStockById(p.getId(),amount);
+        SQLiteProductRepository.removeStockById(p.getId(),amount);
         return Result.OK;
     }
 
